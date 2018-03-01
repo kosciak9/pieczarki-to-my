@@ -106,14 +106,18 @@ void initialize(const std::string path)
 /* saves output data */
 void submit(const std::string& path)
 {
-    std::ofstream file{ path };
-
-    file << output.M;
-    for (auto& r : output.R)
-    {
-        file << r;
+    std::ofstream output;
+    output.open(path.c_str());
+    if (output.is_open()) {
+        for (int i = 0; i < vehicles.size(); i++) {
+            output << vehicles[i].rides.size();
+            for (int j = 0; j < vehicles[i].rides.size(); j++) {
+                output << vehicles[i].rides[j];
+            }
+            output << std::endl;
+        }
     }
-    file.close();
+    output.close();
 }
 
 
