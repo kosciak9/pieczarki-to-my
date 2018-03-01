@@ -30,19 +30,6 @@ struct Int2
 };
 
 
-struct Ride;
-
-struct Vehicle
-{
-  std::vector<Ride&> rides;
-};
-
-
-std::vector<Ride> rides;
-std::vector<Vehicle> vehicles;
-int currentVehicleID = 0;
-
-
 
 
 struct Ride
@@ -60,12 +47,29 @@ struct Ride
     return abs(a.x - b.x) + abs(a.y - b.y);
   }
 
-  bool canTake()
-  {
-    Vehicle current_vehicle = vehicles[currentVehicleID];
-    return true;
-  }
+  bool canTake();
 };
+
+
+
+
+struct Vehicle
+{
+  std::vector<Ride&> rides;
+};
+
+
+
+bool Ride::canTake()
+{
+  Vehicle current_vehicle = vehicles[currentVehicleID];
+  return true;
+}
+
+
+std::vector<Ride> rides;
+std::vector<Vehicle> vehicles;
+int currentVehicleID = 0;
 
 
 struct
