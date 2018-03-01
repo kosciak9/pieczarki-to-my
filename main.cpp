@@ -132,14 +132,17 @@ void submit(const std::string& path)
     std::ofstream output;
     output.open(path.c_str());
 
-    if (output.is_open()) {
-        for (int i = 0; i < vehicles.size(); i++) {
-            output << vehicles[i].rides.size();
-            for (int j = 0; j < vehicles[i].rides.size(); j++) {
-                output << vehicles[i].rides[j];
-            }
-            output << std::endl;
+    if (output.is_open())
+    {
+      for (int i = 0; i < vehicles.size(); i++)
+      {
+        output << vehicles[i].rides.size() << " ";
+        for (int j = 0; j < vehicles[i].rides.size(); j++)
+        {
+          output << vehicles[i].rides[j] << " ";
         }
+        output << std::endl;
+      }
     }
     output.close();
 }
