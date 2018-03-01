@@ -34,7 +34,7 @@ struct Ride;
 
 struct Vehicle
 {
-  std::vector<Ride*> rides;
+  std::vector<Ride&> rides;
 };
 
 
