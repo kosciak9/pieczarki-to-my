@@ -147,9 +147,10 @@ void calculate()
 {
   while (!rides.empty())
   {
+    // sort rides by how good they are, best ones first
     std::sort(rides, rideComparer);
 
-    // pick the first which we can take at all
+    // pick the first ride which we can take at all
     for (Ride& ride : rides)
     {
       if (ride.canTake())
