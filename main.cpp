@@ -1,6 +1,7 @@
 #include <string>
 #include <fstream>
 #include <vector>
+#include <algorithm>
 
 
 
@@ -41,6 +42,15 @@ struct Ride
   int earliest_start;
   int latest_finish;
 };
+
+
+struct
+{
+    bool operator() (const Ride& a, const Ride& b) const
+    {
+        return a.points > b.points;
+    }
+} rideComparer;
 
 
 
@@ -108,6 +118,7 @@ void submit(const std::string& path)
 {
     std::ofstream output;
     output.open(path.c_str());
+
     if (output.is_open()) {
         for (int i = 0; i < vehicles.size(); i++) {
             output << vehicles[i].rides.size();
@@ -124,13 +135,13 @@ void submit(const std::string& path)
 
 
 
-/* finds the solution to the problem */
+
+int currentVehicleID = 0;
 void calculate()
 {
-  int currentVehicleID = 0;
   while (!rides.empty())
   {
-    // sort rides by possible points earned
+    std::sort(rides, rideComparer);
     // pick the first which we can take at all
 
     currentVehicleID++;
