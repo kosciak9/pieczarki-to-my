@@ -2,8 +2,10 @@
 #include <fstream>
 #include <vector>
 
-#pragma region description
-struct input
+
+
+
+struct Input
 {
     int R; /* horizontal rows */
     int C; /* vertical columns */
@@ -15,43 +17,57 @@ struct input
     int B; /* bonus */
     int T; /* simulation steps */
 } input;
-struct output
+
+
+
+struct Output
 {
     int M;
     std::vector<int> R;
 } output;
-#pragma endregion
 
-#pragma region data structures
-struct int2
+
+
+
+struct Int2
 {
     int x = 0;
     int y = 0;
 };
 
-/* ride desc */
-struct ride
+
+
+
+
+struct Ride
 {
-    int2 start_intersection;
-    int2 finish_intersection;
+    Int2 start_intersection;
+    Int2 finish_intersection;
 
     int earliest_start;
     int latest_finish;
 };
 
-/* vehicle desc */
-struct vehicle
-{
-    int2 position;
-};
-#pragma endregion
 
-#pragma region data
+
+
+
+struct Vehicle
+{
+    Int2 position;
+};
+
+
+
+
 int step = 0; /* current simulation time */
 
-std::vector<ride> rides;
-std::vector<vehicle> vehicles;
-#pragma endregion
+std::vector<Ride> rides;
+std::vector<Vehicle> vehicles;
+
+
+
+
 
 /* initialized input data and structures */
 void initialize(const std::string path)
@@ -75,19 +91,23 @@ void initialize(const std::string path)
     /* create rides */
     for (int i = 0; i < input.N; ++i)
     {
-        ride ride;
-        file >> ride.start_intersection.x;
-        file >> ride.start_intersection.y;
-        file >> ride.finish_intersection.x;
-        file >> ride.finish_intersection.y;
-        file >> ride.earliest_start;
-        file >> ride.latest_finish;
+        Ride Ride;
+        file >> Ride.start_intersection.x;
+        file >> Ride.start_intersection.y;
+        file >> Ride.finish_intersection.x;
+        file >> Ride.finish_intersection.y;
+        file >> Ride.earliest_start;
+        file >> Ride.latest_finish;
 
-        rides.push_back(ride);
+        rides.push_back(Ride);
     }
 
     file.close();
 }
+
+
+
+
 
 /* saves output data */
 void submit(const std::string& path)
@@ -102,10 +122,18 @@ void submit(const std::string& path)
     file.close();
 }
 
+
+
+
+
 /* finds the solution to the problem */
 void calculate()
 {
 }
+
+
+
+
 
 int main()
 {
