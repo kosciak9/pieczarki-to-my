@@ -172,18 +172,24 @@ void calculate()
   while (!rides.empty())
   {
     // sort rides by how good they are, best ones first
+    std::cout << "sorting rides...";
     std::sort(rides.begin(), rides.end(), rideComparer);
+    std::cout << "sorted" << std::endl;
 
     // pick the first ride which we can take at all
+    std::cout << "iterating rides..." << std::endl;
     for (int i = 0; i < rides.size(); i++)
     {
+      std::cout << "\tchecking ride with ID " << rides[i].ID << "..." << std::endl;
       if (rides[i].canTake())
       {
+        std::cout << "\t\ttaking ride" << std::endl;
         vehicles[currentVehicleID].rides.push_back(rides[i]);
         rides.erase(rides.begin() + i);
         break;
       }
     }
+    std::cout << "iterated" << std::endl;
 
     currentVehicleID++;
   }
