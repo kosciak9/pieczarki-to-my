@@ -92,15 +92,6 @@ std::vector<Vehicle> vehicles;
 int currentVehicleID = 0;
 
 
-struct
-{
-    bool operator() (const Ride& a, const Ride& b) const
-    {
-        return a.points() > b.points();
-    }
-} rideComparer;
-
-
 
 
 
@@ -181,7 +172,7 @@ void calculate()
   while (!rides.empty())
   {
     // sort rides by how good they are, best ones first
-    std::sort(rides, rideComparer);
+    std::sort(rides.begin(), rides.end(), rideComparer);
 
     // pick the first ride which we can take at all
     for (int i = 0; i < rides.size(); i++)
