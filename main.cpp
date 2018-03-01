@@ -30,14 +30,18 @@ struct Int2
 };
 
 
-int dist(Int2 a, Int2 b)
+struct Ride;
+
+struct Vehicle
 {
-  return abs(a.x - b.x) + abs(a.y - b.y);
-}
+  std::vector<Ride*> rides;
+};
 
 
-
-
+std::vector<Ride> rides;
+std::vector<Vehicle> vehicles;
+int currentVehicleID = 0;
+int step = 0; /* current simulation time */
 
 struct Ride
 {
@@ -49,10 +53,15 @@ struct Ride
   int earliest_start;
   int latest_finish;
 
+  int dist(Int2 a, Int2 b)
+  {
+    return abs(a.x - b.x) + abs(a.y - b.y);
+  }
 
   bool canTake()
   {
-    // TODO: Franek
+    Vehicle current_vehicle = vehicles[currentVehicleID];
+    return true;
   }
 };
 
@@ -69,18 +78,7 @@ struct
 
 
 
-struct Vehicle
-{
-  std::vector<Ride&> rides;
-};
 
-
-
-
-int step = 0; /* current simulation time */
-
-std::vector<Ride> rides;
-std::vector<Vehicle> vehicles;
 
 
 
@@ -152,7 +150,6 @@ void submit(const std::string& path)
 
 
 
-int currentVehicleID = 0;
 void calculate()
 {
   while (!rides.empty())
