@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 
 
@@ -40,6 +41,7 @@ struct Vehicle
 std::vector<Ride> rides;
 std::vector<Vehicle> vehicles;
 int currentVehicleID = 0;
+int step = 0; /* current simulation time */
 
 struct Ride
 {
@@ -51,10 +53,15 @@ struct Ride
   int earliest_start;
   int latest_finish;
 
+  int dist(Int2 a, Int2 b)
+  {
+    return abs(a.x - b.x) + abs(a.y - b.y);
+  }
 
   bool canTake()
   {
     Vehicle current_vehicle = vehicles[currentVehicleID];
+    return true;
   }
 };
 
@@ -71,11 +78,6 @@ struct
 
 
 
-
-
-
-
-int step = 0; /* current simulation time */
 
 
 
@@ -149,10 +151,18 @@ void calculate()
 {
   while (!rides.empty())
   {
+    // sort rides by how good they are, best ones first
     std::sort(rides, rideComparer);
 
-    // pick the first which we can take at all
-
+    // pick the first ride which we can take at all
+    for (Ride& ride : rides)
+    {
+      if (ride.canTake())
+      {
+        vehicles[currentVehicleID].rides.push_back(ride);
+        break;
+      }
+    }
 
     currentVehicleID++;
   }
