@@ -64,7 +64,7 @@ struct
 
 struct Vehicle
 {
-  std::vector<Ride*> rides;
+  std::vector<Ride&> rides;
 };
 
 
@@ -150,7 +150,14 @@ void calculate()
     std::sort(rides, rideComparer);
 
     // pick the first which we can take at all
-
+    for (Ride& ride : rides)
+    {
+      if (ride.canTake())
+      {
+        vehicles[currentVehicleID].rides.push_back(ride);
+        break;
+      }
+    }
 
     currentVehicleID++;
   }
