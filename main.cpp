@@ -45,24 +45,30 @@ int step = 0; /* current simulation time */
 
 struct Ride
 {
-  int ID;
+    int ID;
 
-  Int2 start_intersection;
-  Int2 finish_intersection;
+    Int2 start_intersection;
+    Int2 finish_intersection;
 
-  int earliest_start;
-  int latest_finish;
+    int earliest_start;
+    int latest_finish;
 
-  int dist(Int2 a, Int2 b)
-  {
+
+    int points()
+    {
+        return finish_intersection.x - start_intersection.x + finish_intersection.y - start_intersection.y;
+    }
+
+    int dist(Int2 a, Int2 b)
+    {
     return abs(a.x - b.x) + abs(a.y - b.y);
-  }
+    }
 
-  bool canTake()
-  {
+    bool canTake()
+    {
     Vehicle current_vehicle = vehicles[currentVehicleID];
     return true;
-  }
+    }
 };
 
 
@@ -70,7 +76,7 @@ struct
 {
     bool operator() (const Ride& a, const Ride& b) const
     {
-        return a.points > b.points;
+        return a.points() > b.points();
     }
 } rideComparer;
 
