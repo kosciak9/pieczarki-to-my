@@ -44,6 +44,9 @@ struct Ride
     int latest_finish;
 
 
+    int real_start;
+
+
     int points() const
     {
         return finish_intersection.x - start_intersection.x + finish_intersection.y - start_intersection.y;
@@ -65,6 +68,15 @@ struct
         return a.points() > b.points();
     }
 } rideComparer;
+
+
+struct
+{
+    bool operator() (const Ride& a, const Ride& b) const
+    {
+        return a.real_start > b.real_start;
+    }
+} rideComparerStart;
 
 
 
@@ -186,7 +198,13 @@ void calculate()
       if (rides[i].canTake())
       {
         std::cout << "\t\ttaking ride" << std::endl;
+        for (int j = 0; j < vehicles[currentVehicleID].rides.size(); j++)
+        {
+          if (vehicles[currentVehicleID].rides[i].end() > )
+          rides[i].real_start
+        }
         vehicles[currentVehicleID].rides.push_back(rides[i]);
+        std::sort(vehicles[currentVehicleID].rides.begin(), vehicles[currentVehicleID].rides.end(), rideComparerStart);
         rides.erase(rides.begin() + i);
         break;
       }
