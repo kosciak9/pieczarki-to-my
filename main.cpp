@@ -41,7 +41,9 @@ struct Vehicle
 std::vector<Ride> rides;
 std::vector<Vehicle> vehicles;
 int currentVehicleID = 0;
-int step = 0; /* current simulation time */
+
+
+
 
 struct Ride
 {
