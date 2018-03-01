@@ -1,4 +1,5 @@
 #include <string>
+#include <iostream>
 #include <fstream>
 #include <vector>
 #include <algorithm>
@@ -64,16 +65,20 @@ struct
 
 struct Vehicle
 {
-  std::vector<Ride&> rides;
+  std::vector<Ride> rides;
 };
 
 
 
 bool Ride::canTake()
 {
-  Vehicle current_vehicle = vehicles[currentVehicleID];
+  // Vehicle current_vehicle = vehicles[currentVehicleID];
+  // for (int i = 0; i < current_vehicle.rides.size()) {
+  //     checkedRide = current_vehicle.rides[i];
+  //     if (checkedRide.latest_finish )
+  // }
   return true;
-}
+} // jak chcesz commitować to zakomentuj po prostu
 
 
 std::vector<Ride> rides;
@@ -112,13 +117,13 @@ void initialize(const std::string path)
     /* create rides */
     for (int i = 0; i < input.N; ++i)
     {
-        Ride Ride;
-        file >> Ride.start_intersection.x;
-        file >> Ride.start_intersection.y;
-        file >> Ride.finish_intersection.x;
-        file >> Ride.finish_intersection.y;
-        file >> Ride.earliest_start;
-        file >> Ride.latest_finish;
+        Ride ride;
+        file >> ride.start_intersection.x;
+        file >> ride.start_intersection.y;
+        file >> ride.finish_intersection.x;
+        file >> ride.finish_intersection.y;
+        file >> ride.earliest_start;
+        file >> ride.latest_finish;
 
         rides.push_back(Ride);
     }
@@ -164,11 +169,12 @@ void calculate()
     std::sort(rides, rideComparer);
 
     // pick the first ride which we can take at all
-    for (Ride& ride : rides)
+    for (int i = 0; i < rides.size(); i++)
     {
-      if (ride.canTake())
+      if (rides[i].canTake())
       {
-        vehicles[currentVehicleID].rides.push_back(ride);
+        vehicles[currentVehicleID].rides.push_back(rides[i]);
+        rides.erase(rides.begin() + i);
         break;
       }
     }
@@ -181,13 +187,27 @@ void calculate()
 
 
 
-int main()
+int main(int argc, const char* argv[])
 {
-    initialize("data/a_example.in");
+  std::string input_file, output_file;
 
-    calculate();
+  if (argc == 3)
+  {
+    input_file = argv[1];
+    output_file = argv[2];
+  }
+  else
+  {
+    std::cout << "Usage: pieczarki [file_name.in] [file_name.out]" << std::endl;
+    std::cout << "Assuming files are a_example.*" << std::endl;
+    input_file = "a_example.in";
+    output_file = "a_example.out";
+  }
 
-    submit("data/a_exmaple.out");
 
-    return 0;
+  initialize(input_file);
+  calculate();
+  submit(output_file);
+
+  return 0;
 }
