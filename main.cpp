@@ -2,6 +2,7 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <cstdlib>
 
 
 
@@ -27,6 +28,12 @@ struct Int2
   int x = 0;
   int y = 0;
 };
+
+
+int dist(Int2 a, Int2 b)
+{
+  return abs(a.x - b.x) + abs(a.y - b.y);
+}
 
 
 
