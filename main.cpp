@@ -57,6 +57,15 @@ struct Ride
 };
 
 
+struct
+{
+    bool operator() (const Ride& a, const Ride& b) const
+    {
+        return a.points > b.points;
+    }
+} rideComparer;
+
+
 
 
 struct Vehicle
@@ -78,6 +87,7 @@ std::vector<Vehicle> vehicles;
 int currentVehicleID = 0;
 
 
+<<<<<<< HEAD
 struct
 {
     bool operator() (const Ride& a, const Ride& b) const
@@ -87,6 +97,8 @@ struct
 } rideComparer;
 
 
+=======
+>>>>>>> c44c5a3fabc4c21a659e0ec5d790129d9cafa979
 
 
 
