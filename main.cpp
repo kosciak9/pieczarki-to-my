@@ -131,6 +131,8 @@ void initialize(const std::string path)
         file >> ride.earliest_start;
         file >> ride.latest_finish;
 
+        ride.ID = rides.size();
+
         rides.push_back(ride);
     }
 
