@@ -44,7 +44,7 @@ struct Ride
     int latest_finish;
 
 
-    int points()
+    int points() const
     {
         return finish_intersection.x - start_intersection.x + finish_intersection.y - start_intersection.y;
     }
@@ -62,7 +62,7 @@ struct
 {
     bool operator() (const Ride& a, const Ride& b) const
     {
-        return a.points > b.points;
+        return a.points() > b.points();
     }
 } rideComparer;
 
@@ -92,7 +92,6 @@ std::vector<Vehicle> vehicles;
 int currentVehicleID = 0;
 
 
-<<<<<<< HEAD
 struct
 {
     bool operator() (const Ride& a, const Ride& b) const
@@ -102,8 +101,6 @@ struct
 } rideComparer;
 
 
-=======
->>>>>>> c44c5a3fabc4c21a659e0ec5d790129d9cafa979
 
 
 
@@ -143,7 +140,7 @@ void initialize(const std::string path)
         file >> ride.earliest_start;
         file >> ride.latest_finish;
 
-        rides.push_back(Ride);
+        rides.push_back(ride);
     }
 
     file.close();
@@ -166,7 +163,7 @@ void submit(const std::string& path)
         output << vehicles[i].rides.size() << " ";
         for (int j = 0; j < vehicles[i].rides.size(); j++)
         {
-          output << vehicles[i].rides[j] << " ";
+          output << vehicles[i].rides[j].ID << " ";
         }
         output << std::endl;
       }
