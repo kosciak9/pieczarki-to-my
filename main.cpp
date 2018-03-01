@@ -29,8 +29,17 @@ struct Int2
 };
 
 
+struct Ride;
+
+struct Vehicle
+{
+  std::vector<Ride*> rides;
+};
 
 
+std::vector<Ride> rides;
+std::vector<Vehicle> vehicles;
+int currentVehicleID = 0;
 
 struct Ride
 {
@@ -45,7 +54,7 @@ struct Ride
 
   bool canTake()
   {
-    // TODO: Franek
+    Vehicle current_vehicle = vehicles[currentVehicleID];
   }
 };
 
@@ -62,18 +71,12 @@ struct
 
 
 
-struct Vehicle
-{
-  std::vector<Ride*> rides;
-};
 
 
 
 
 int step = 0; /* current simulation time */
 
-std::vector<Ride> rides;
-std::vector<Vehicle> vehicles;
 
 
 
@@ -142,7 +145,6 @@ void submit(const std::string& path)
 
 
 
-int currentVehicleID = 0;
 void calculate()
 {
   while (!rides.empty())
