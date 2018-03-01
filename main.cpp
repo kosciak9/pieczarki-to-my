@@ -123,6 +123,14 @@ void submit(const std::string& path)
 /* finds the solution to the problem */
 void calculate()
 {
+  int currentVehicleID = 0;
+  while (!rides.empty())
+  {
+    // sort rides by possible points earned
+    // pick the first which we can take at all
+
+    currentVehicleID++;
+  }
 }
 
 
