@@ -41,6 +41,12 @@ struct Ride
 
   int earliest_start;
   int latest_finish;
+
+
+  bool canTake()
+  {
+    // TODO: Franek
+  }
 };
 
 
@@ -142,7 +148,9 @@ void calculate()
   while (!rides.empty())
   {
     std::sort(rides, rideComparer);
+
     // pick the first which we can take at all
+
 
     currentVehicleID++;
   }
