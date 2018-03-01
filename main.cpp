@@ -7,32 +7,24 @@
 
 struct Input
 {
-    int R; /* horizontal rows */
-    int C; /* vertical columns */
+  int R; /* horizontal rows */
+  int C; /* vertical columns */
 
-    int F; /* vechicles */
+  int F; /* vechicles */
 
-    int N; /* number of prebooked rides */
+  int N; /* number of prebooked rides */
 
-    int B; /* bonus */
-    int T; /* simulation steps */
+  int B; /* bonus */
+  int T; /* simulation steps */
 } input;
-
-
-
-struct Output
-{
-    int M;
-    std::vector<int> R;
-} output;
 
 
 
 
 struct Int2
 {
-    int x = 0;
-    int y = 0;
+  int x = 0;
+  int y = 0;
 };
 
 
@@ -41,11 +33,13 @@ struct Int2
 
 struct Ride
 {
-    Int2 start_intersection;
-    Int2 finish_intersection;
+  int ID;
 
-    int earliest_start;
-    int latest_finish;
+  Int2 start_intersection;
+  Int2 finish_intersection;
+
+  int earliest_start;
+  int latest_finish;
 };
 
 
@@ -54,7 +48,7 @@ struct Ride
 
 struct Vehicle
 {
-    Int2 position;
+  std::vector<Ride*> rides;
 };
 
 
